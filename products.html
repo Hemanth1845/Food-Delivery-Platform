@@ -4,13 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu - HemanthFoodiee</title>
+    <title>Products - HemanthFoodiee</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reusing styles from products.html for consistency */
-        .dishes-container {
+        .products-filter {
+            padding: 2rem 5%;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem;
+            border: 1px solid #e74c3c;
+            background: transparent;
+            color: #e74c3c;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .products-grid {
+            padding: 2rem 5%;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
@@ -88,32 +111,23 @@
         .add-to-cart:hover {
             background: #c0392b;
         }
-
-        .category-title {
-            margin: 2rem 0 1rem;
-            font-size: 2rem;
-            color: #333;
-            border-bottom: 2px solid #e74c3c;
-            display: inline-block;
-        }
     </style>
 </head>
 
 <body>
     <header>
-        <nav class="navbar">
+        <nav class="navbar user-navbar">
             <div class="logo">
-                <h1><a href="index.html"><span>Hemanth</span>Foodiee</a></h1>
+                <h1><a href="user-dashboard.html"><span>Hemanth</span>Foodiee</a></h1>
             </div>
             <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="menu.html" class="active">Menu</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+                <a href="user-dashboard.html">Home</a>
+                <a href="products.html" class="active">Products</a>
+                <a href="user-profile.html">Profile</a>
+                <a href="cart.html">Cart <span class="cart-count">0</span></a>
             </div>
             <div class="auth-buttons">
-                <a href="login.html" class="btn login-btn">Login</a>
-                <a href="register.html" class="btn register-btn">Register</a>
+                <a href="index.html" class="btn logout-btn">Logout</a>
             </div>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -123,34 +137,24 @@
         </nav>
     </header>
 
-    <section class="page-header">
-        <div class="page-header-content">
-            <h1>Our Menu</h1>
-            <p>Explore our delicious offerings</p>
-        </div>
+    <section class="page-header" style="padding: 100px 5% 40px; text-align: center; background: #fff4e6;">
+        <h1>Our Menu</h1>
+        <p>Choose from our wide range of delicious meals</p>
     </section>
 
-    <section class="menu-filters">
-        <div class="filter-container">
-            <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search for dishes...">
-                <button id="search-btn"><i class="fas fa-search"></i></button>
-            </div>
-            <div class="category-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="pizza">Pizza</button>
-                <button class="filter-btn" data-filter="burger">Burgers</button>
-                <button class="filter-btn" data-filter="chicken">Chicken</button>
-                <button class="filter-btn" data-filter="pasta">Pasta</button>
-                <button class="filter-btn" data-filter="biryani">Biryani</button>
-                <button class="filter-btn" data-filter="dessert">Desserts</button>
-            </div>
-        </div>
+    <section class="products-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="pizza">Pizza</button>
+        <button class="filter-btn" data-filter="burger">Burger</button>
+        <button class="filter-btn" data-filter="chicken">Chicken</button>
+        <button class="filter-btn" data-filter="pasta">Pasta</button>
+        <button class="filter-btn" data-filter="biryani">Biryani</button>
+        <button class="filter-btn" data-filter="dessert">Dessert</button>
     </section>
 
-    <div id="full-menu-container" class="menu-container" style="padding: 0 5% 4rem;">
-        <!-- Dynamic content will be injected here -->
-    </div>
+    <section class="products-grid" id="products-container">
+        <!-- Products will be loaded here dynamically -->
+    </section>
 
     <footer>
         <div class="footer-content">
@@ -161,10 +165,10 @@
             <div class="footer-links">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="user-dashboard.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="user-profile.html">Profile</a></li>
+                    <li><a href="cart.html">Cart</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -192,18 +196,10 @@
     <script src="js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const container = document.getElementById('full-menu-container');
+            const container = document.getElementById('products-container');
             const filterBtns = document.querySelectorAll('.filter-btn');
-            const searchInput = document.getElementById('search-input');
-            const searchBtn = document.getElementById('search-btn');
 
-            // To group items by category
-            const categories = ['pizza', 'burger', 'chicken', 'pasta', 'biryani', 'dessert'];
-
-            // Helper to title case
-            const toTitleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-
-            // Function to generate stars
+            // Function to generate stars based on rating
             function getStars(rating) {
                 let starsHTML = '';
                 for (let i = 1; i <= 5; i++) {
@@ -218,69 +214,52 @@
                 return starsHTML;
             }
 
-            // Function to render items grouped by category
-            function renderMenu(filter = 'all', searchQuery = '') {
+            // Function to render products
+            function renderProducts(filter = 'all') {
                 container.innerHTML = '';
 
-                let categoriesToRender = filter === 'all' ? categories : [filter];
+                const productsToRender = filter === 'all'
+                    ? menuItems
+                    : menuItems.filter(item => item.category === filter);
 
-                categoriesToRender.forEach(cat => {
-                    // Filter items for this category
-                    let items = menuItems.filter(item => item.category === cat || (cat === 'burger' && item.category === 'burgers')); // Handle plural mismatch if any
+                productsToRender.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'dish-card';
+                    card.setAttribute('data-category', item.category);
 
-                    // Apply search
-                    if (searchQuery) {
-                        const query = searchQuery.toLowerCase();
-                        items = items.filter(item => item.name.toLowerCase().includes(query) || item.description.toLowerCase().includes(query));
-                    }
-
-                    if (items.length > 0) {
-                        // Create Section
-                        const section = document.createElement('section');
-                        section.className = 'menu-section';
-                        section.id = cat;
-
-                        const title = document.createElement('h2');
-                        title.className = 'category-title';
-                        title.textContent = toTitleCase(cat);
-                        section.appendChild(title);
-
-                        const grid = document.createElement('div');
-                        grid.className = 'dishes-container';
-
-                        items.forEach(item => {
-                            const card = document.createElement('div');
-                            card.className = 'dish-card';
-                            card.innerHTML = `
-                                <div class="dish-img">
-                                    <a href="product-details.html?id=${item.id}">
-                                        <img src="${item.image}" alt="${item.name}" loading="lazy">
-                                    </a>
-                                </div>
-                                <div class="dish-info">
-                                    <h3><a href="product-details.html?id=${item.id}" style="color: inherit; text-decoration: none;">${item.name}</a></h3>
-                                    <div class="dish-rating">
-                                        ${getStars(item.rating)} <span>(${item.rating})</span>
-                                    </div>
-                                    <p class="dish-desc">${item.description}</p>
-                                    <div class="dish-footer">
-                                        <span class="price">₹${item.price}</span>
-                                        <button class="add-to-cart">Add to Cart</button>
-                                    </div>
-                                </div>
-                            `;
-                            grid.appendChild(card);
-                        });
-
-                        section.appendChild(grid);
-                        container.appendChild(section);
-                    }
+                    card.innerHTML = `
+                        <div class="dish-img">
+                            <a href="product-details.html?id=${item.id}">
+                                <img src="${item.image}" alt="${item.name}" loading="lazy">
+                            </a>
+                        </div>
+                        <div class="dish-info">
+                            <h3><a href="product-details.html?id=${item.id}" style="color: inherit; text-decoration: none;">${item.name}</a></h3>
+                            <div class="dish-rating">
+                                ${getStars(item.rating)} <span>(${item.rating})</span>
+                            </div>
+                            <p class="dish-desc">${item.description}</p>
+                            <div class="dish-footer">
+                                <span class="price">₹${item.price}</span>
+                                <button class="add-to-cart">Add to Cart</button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
                 });
 
+                // Re-attach add to cart event listeners
                 attachAddToCartListeners();
             }
 
+            // Helper to re-attach listeners since we replaced DOM elements
             function attachAddToCartListeners() {
+                // We access the functionality from script.js, but since it runs on load,
+                // we might need to manually trigger or duplicate simple logic here 
+                // if script.js isn't using delegation.
+                // Checking script.js, it attaches to .add-to-cart on load.
+                // We'll reimplement simple logic here to be safe and consistent.
+
                 const btns = document.querySelectorAll('.add-to-cart');
                 btns.forEach(btn => {
                     btn.addEventListener('click', function () {
@@ -308,6 +287,7 @@
                             <p>${name} added to cart!</p>
                         `;
 
+                        // Basic notification styles inline or assume CSS exists (it does in script.js but we're dynamic)
                         Object.assign(notification.style, {
                             position: 'fixed',
                             bottom: '20px',
@@ -327,10 +307,12 @@
                         });
 
                         document.body.appendChild(notification);
+
                         setTimeout(() => {
                             notification.style.transform = 'translateY(0)';
                             notification.style.opacity = '1';
                         }, 10);
+
                         setTimeout(() => {
                             notification.style.transform = 'translateY(100px)';
                             notification.style.opacity = '0';
@@ -341,26 +323,15 @@
             }
 
             // Initial Render
-            renderMenu();
+            renderProducts();
 
-            // Filter Handlers
+            // Filter Click Events
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     filterBtns.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    renderMenu(btn.dataset.filter, searchInput.value);
+                    renderProducts(btn.dataset.filter);
                 });
-            });
-
-            // Search Handlers
-            searchBtn.addEventListener('click', () => {
-                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-                renderMenu(activeFilter, searchInput.value);
-            });
-
-            searchInput.addEventListener('input', (e) => {
-                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-                renderMenu(activeFilter, e.target.value);
             });
         });
     </script>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - HemanthFoodiee</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .orders-container {
+            padding: 100px 5% 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .order-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            border-left: 5px solid #e74c3c;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-id {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .order-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .status-preparing {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .order-items {
+            margin-bottom: 1rem;
+        }
+
+        .order-item-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .order-total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .empty-orders {
+            text-align: center;
+            padding: 3rem;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar user-navbar">
+            <div class="logo">
+                <h1><a href="user-dashboard.html"><span>Hemanth</span>Foodiee</a></h1>
+            </div>
+            <div class="nav-links">
+                <a href="user-dashboard.html">Home</a>
+                <a href="my-orders.html" class="active">My Orders</a>
+                <a href="notifications.html">Notifications</a>
+                <a href="cart.html">Cart</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="orders-container">
+        <h1>My Orders</h1>
+        <div id="orders-list">
+            <!-- Dynamic Orders -->
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.getElementById('orders-list');
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-orders">
+                        <i class="fas fa-box-open fa-3x"></i>
+                        <p>No orders yet. <a href="menu.html">Start ordering!</a></p>
+                    </div>
+                `;
+                return;
+            }
+
+            orders.forEach(order => {
+                const date = new Date(order.date).toLocaleString();
+                let statusClass = 'status-preparing';
+                if (order.status === 'Delivered') statusClass = 'status-delivered';
+
+                let itemsHTML = '';
+                order.items.forEach(item => {
+                    itemsHTML += `
+                        <div class="order-item-row">
+                            <span>${item.quantity}x ${item.name}</span>
+                            <span>₹${(item.price * item.quantity).toFixed(2)}</span>
+                        </div>
+                    `;
+                });
+
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.innerHTML = `
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #${order.id}</div>
+                            <small class="text-muted">${date}</small>
+                        </div>
+                        <span class="order-status ${statusClass}">${order.status}</span>
+                    </div>
+                    <div class="order-items">
+                        ${itemsHTML}
+                    </div>
+                    <div class="order-footer">
+                        <span>Payment: ${order.paymentMethod}</span>
+                        <span class="order-total">Total: ₹${order.total}</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        });
+    </script>
+</body>
+
+</html>

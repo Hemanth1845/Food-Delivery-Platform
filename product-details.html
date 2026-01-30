@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - HemanthFoodiee</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .details-container {
+            padding: 120px 5% 60px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .product-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .category-tag {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: capitalize;
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .restaurant-name {
+            font-size: 1.1rem;
+            color: #777;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .rating-block {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            color: #f1c40f;
+        }
+
+        .price-block {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 2rem;
+        }
+
+        .description-block {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .add-cart-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .add-cart-btn:hover {
+            background: #c0392b;
+        }
+
+        .reviews-section {
+            width: 100%;
+            margin-top: 2rem;
+            border-top: 1px solid #eee;
+            padding-top: 2rem;
+        }
+
+        .review-card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .reviewer-name {
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #555;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1><a href="index.html"><span>Hemanth</span>Foodiee</a></h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="auth-buttons">
+                <a href="cart.html" class="btn login-btn"><i class="fas fa-shopping-cart"></i> <span
+                        class="cart-count">0</span></a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="details-container" id="product-details">
+        <!-- Content will be loaded dynamically -->
+        <p>Loading product details...</p>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2><span>Hemanth</span>Foodiee</h2>
+                <p>Delicious food delivered fast</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Andhra pradesh Srikakulam Balaga</p>
+                <p><i class="fas fa-phone"></i> +91 9014189399</p>
+                <p><i class="fas fa-envelope"></i> hemanthravada100@gmail.com</p>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 HemanthFoodiee. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/menu-data.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id'));
+            const container = document.getElementById('product-details');
+
+            if (!productId) {
+                container.innerHTML = '<p>Product not found. <a href="menu.html">Return to Menu</a></p>';
+                return;
+            }
+
+            const product = menuItems.find(item => item.id === productId);
+
+            if (!product) {
+                container.innerHTML = '<p>Product not found. <a href="menu.html">Return to Menu</a></p>';
+                return;
+            }
+
+            function getStars(rating) {
+                let starsHTML = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= Math.floor(rating)) {
+                        starsHTML += '<i class="fas fa-star"></i>';
+                    } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
+                        starsHTML += '<i class="fas fa-star-half-alt"></i>';
+                    } else {
+                        starsHTML += '<i class="far fa-star"></i>';
+                    }
+                }
+                return starsHTML;
+            }
+
+            // Render Review List
+            let reviewsHTML = '';
+            if (product.reviews && product.reviews.length > 0) {
+                product.reviews.forEach(review => {
+                    reviewsHTML += `
+                        <div class="review-card">
+                            <div class="review-header">
+                                <span class="reviewer-name">${review.user}</span>
+                                <span class="review-rating">${getStars(review.rating)}</span>
+                            </div>
+                            <p>${review.text}</p>
+                        </div>
+                    `;
+                });
+            } else {
+                reviewsHTML = '<p>No reviews yet.</p>';
+            }
+
+            container.innerHTML = `
+                 <div style="width: 100%; margin-bottom: 20px;">
+                    <a href="menu.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Menu</a>
+                 </div>
+                 
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                
+                <div class="product-info">
+                    <span class="category-tag">${product.category}</span>
+                    <h1 class="product-title">${product.name}</h1>
+                    <div class="restaurant-name">
+                        <i class="fas fa-store"></i> ${product.restaurant || 'HemanthFoodiee Kitchen'}
+                    </div>
+                    
+                    <div class="rating-block">
+                        ${getStars(product.rating)} <span>(${product.rating} / 5.0)</span>
+                    </div>
+                    
+                    <div class="price-block">₹${product.price}</div>
+                    
+                    <div class="description-block">
+                        <p>${product.description}</p>
+                        <p style="margin-top: 1rem;">Ideally prepared with fresh ingredients and authentic spices. One of our top-rated dishes in the ${product.category} category.</p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="add-cart-btn" id="add-btn">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="reviews-section">
+                    <h2>Customer Reviews</h2>
+                    ${reviewsHTML}
+                </div>
+            `;
+
+            // Attach Event Listener
+            document.getElementById('add-btn').addEventListener('click', () => {
+                if (window.CartManager) {
+                    CartManager.addItem(product);
+
+                    const btn = document.getElementById('add-btn');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Added!';
+                    btn.style.background = '#2ecc71';
+
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.style.background = '#e74c3c';
+                    }, 2000);
+
+                    // Show notification helper if available
+                    // script.js might not expose showNotification, but CartManager likely handles visual cue or we just rely on button change.
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

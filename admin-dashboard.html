@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - FoodExpress</title>
+    <title>Admin Dashboard - HemanthFoodiee</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/dashboard.css">
-    <link rel="stylesheet" href="css/admin.css">
+    <!-- <link rel="stylesheet" href="css/admin.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-sidebar {
+            display: none;
+            /* Hiding sidebar as structure suggests full width dashboard */
+        }
+
+        .admin-container {
+            padding: 2rem 5%;
+        }
+    </style>
 </head>
-<body class="admin-body">
+
+<body>
     <header>
         <nav class="navbar admin-navbar">
             <div class="logo">
-                <h1><a href="admin-dashboard.html"><span>Food</span>Express</a></h1>
+                <h1><a href="admin-dashboard.html"><span>Hemanth</span>Foodiee</a></h1>
             </div>
             <div class="nav-links">
                 <a href="admin-dashboard.html" class="active">Home</a>
                 <a href="admin-profile.html">Profile</a>
+                <a href="manage-users.html">Users</a>
+                <a href="manage-orders.html">Orders</a>
             </div>
             <div class="auth-buttons">
                 <a href="index.html" class="btn logout-btn">Logout</a>
@@ -30,8 +44,126 @@
         </nav>
     </header>
 
-    <div class="admin-container">
-        <aside class="admin-sidebar">
-            <div class="admin-profile">
-                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Admin Profile">
-                <h
+    <section class="dashboard-hero">
+        <div class="hero-content">
+            <h1>Welcome, <span class="user-name">Admin</span>!</h1>
+            <p>Manage your restaurant, orders, and users efficiently.</p>
+        </div>
+    </section>
+
+    <section class="dashboard-stats">
+        <div class="stat-card">
+            <i class="fas fa-shopping-cart"></i>
+            <div class="stat-info">
+                <h3>Total Orders</h3>
+                <p>1,234</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <div class="stat-info">
+                <h3>Total Users</h3>
+                <p>567</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-dollar-sign"></i>
+            <div class="stat-info">
+                <h3>Total Revenue</h3>
+                <p>$12,345</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-utensils"></i>
+            <div class="stat-info">
+                <h3>Menu Items</h3>
+                <p>45</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="recent-orders">
+        <h2>Recent Orders</h2>
+        <div class="order-table-container">
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#ORD-1234</td>
+                        <td>John Doe</td>
+                        <td>2023-06-15</td>
+                        <td>$15.99</td>
+                        <td><span class="status pending">Pending</span></td>
+                        <td><button class="btn-small">Update</button></td>
+                    </tr>
+                    <tr>
+                        <td>#ORD-1235</td>
+                        <td>Jane Smith</td>
+                        <td>2023-06-10</td>
+                        <td>$12.99</td>
+                        <td><span class="status delivered">Delivered</span></td>
+                        <td><button class="btn-small">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>#ORD-1236</td>
+                        <td>Mike Johnson</td>
+                        <td>2023-06-05</td>
+                        <td>$11.99</td>
+                        <td><span class="status cancelled">Cancelled</span></td>
+                        <td><button class="btn-small">View</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2><span>Hemanth</span>Foodiee</h2>
+                <p>Delicious food delivered fast</p>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="admin-dashboard.html">Home</a></li>
+                    <li><a href="admin-profile.html">Profile</a></li>
+                    <li><a href="manage-users.html">Users</a></li>
+                    <li><a href="manage-orders.html">Orders</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Andhra pradesh Srikakulam Balaga</p>
+                <p><i class="fas fa-phone"></i> +91 9014189399</p>
+                <p><i class="fas fa-envelope"></i> hemanthravada100@gmail.com</p>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 HemanthFoodiee. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <!-- <script src="js/admin.js"></script> -->
+</body>
+
+</html>

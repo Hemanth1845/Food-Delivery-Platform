@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - HemanthFoodiee</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .checkout-container {
+            padding: 100px 5% 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .payment-options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .payment-option {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover,
+        .payment-option.active {
+            border-color: #e74c3c;
+            background: #fff4e6;
+        }
+
+        .qr-code-section {
+            text-align: center;
+            margin-top: 1.5rem;
+            display: none;
+            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+        }
+
+        .qr-code-img {
+            width: 200px;
+            height: 200px;
+            margin: 1rem auto;
+            border: 2px dashed #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #777;
+            background: #f9f9f9;
+        }
+
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .success-animation {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .check-icon {
+            font-size: 5rem;
+            color: #2ecc71;
+            margin-bottom: 1rem;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar user-navbar">
+            <div class="logo">
+                <h1><a href="user-dashboard.html"><span>Hemanth</span>Foodiee</a></h1>
+            </div>
+            <div class="nav-links">
+                <a href="user-dashboard.html">Home</a>
+                <a href="cart.html">Back to Cart</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="checkout-container">
+
+        <!-- Step 1: Address -->
+        <div id="address-step" class="step-container">
+            <div class="step-header">
+                <h2>1. Delivery Address</h2>
+            </div>
+            <form id="address-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullname" required value="Hemanth Ravada">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" required value="+91 9014189399">
+                </div>
+                <div class="form-group">
+                    <label>Street Address</label>
+                    <textarea id="street" required>Andhra pradesh Srikakulam Balaga</textarea>
+                </div>
+                <div class="form-group">
+                    <label>City & Pincode</label>
+                    <input type="text" id="city" required value="Srikakulam, 532001">
+                </div>
+                <button type="submit" class="btn-primary">Proceed to Payment</button>
+            </form>
+        </div>
+
+        <!-- Step 2: Payment -->
+        <div id="payment-step" class="step-container hidden">
+            <div class="step-header">
+                <h2>2. Payment Method</h2>
+                <button id="edit-address-btn" style="background:none; border:none; color:#e74c3c; cursor:pointer;">Edit
+                    Address</button>
+            </div>
+
+            <div class="payment-options">
+                <div class="payment-option" data-method="upi">
+                    <i class="fas fa-mobile-alt fa-2x" style="color:#6c5ce7;"></i>
+                    <div>
+                        <h3>UPI (PhonePe, GPay, Paytm)</h3>
+                        <p>Scan QR to pay instantly</p>
+                    </div>
+                </div>
+
+                <div class="payment-option" data-method="cod">
+                    <i class="fas fa-money-bill-wave fa-2x" style="color:#2ecc71;"></i>
+                    <div>
+                        <h3>Cash on Delivery</h3>
+                        <p>Pay upon receiving your order</p>
+                    </div>
+                </div>
+
+                <div class="payment-option" data-method="netbanking">
+                    <i class="fas fa-university fa-2x" style="color:#3498db;"></i>
+                    <div>
+                        <h3>Net Banking</h3>
+                        <p>Pay via your bank account</p>
+                    </div>
+                </div>
+            </div>
+ 
+            <!-- UPI QR Section -->
+            <div id="upi-section" class="qr-code-section">
+                <h3>Scan to Pay</h3>
+                <div class="qr-code-img" style="border:none; height:auto; background:none;">
+                    <img src="images/payment-qr.jpeg" alt="Payment QR Code"
+                        style="width:100%; max-width:300px; border-radius:10px; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+                </div>
+                <p>Scan with any UPI App (PhonePe, GPay, Paytm)</p>
+                <div style="margin-top:1rem;">
+                    <p>Total to Pay: <strong id="pay-amount">₹0.00</strong></p>
+                </div>
+            </div>
+
+            <button id="place-order-btn" class="btn-primary hidden">Place Order</button>
+        </div>
+
+        <!-- Success Message -->
+        <div id="success-step" class="step-container hidden success-animation">
+            <i class="fas fa-check-circle check-icon"></i>
+            <h1>Order Placed Successfully!</h1>
+            <p>Your order will be delivered soon.</p>
+            <p>OrderID: <strong id="order-id"></strong></p>
+            <button onclick="window.location.href='my-orders.html'" class="btn-primary">View My Orders</button>
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if cart is empty
+            if (!window.CartManager || CartManager.getCart().length === 0) {
+                alert("Your cart is empty!");
+                window.location.href = 'menu.html';
+                return;
+            }
+
+            const total = CartManager.getCart().reduce((sum, item) => sum + (item.price * item.quantity), 0) * 1.05 + 50; // Total + Tax + Delivery
+            document.getElementById('pay-amount').textContent = `₹${total.toFixed(2)}`;
+
+            // Step 1: Address Submit
+            const addressForm = document.getElementById('address-form');
+            addressForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                document.getElementById('address-step').classList.add('hidden');
+                document.getElementById('payment-step').classList.remove('hidden');
+            });
+
+            // Edit Address
+            document.getElementById('edit-address-btn').addEventListener('click', () => {
+                document.getElementById('payment-step').classList.add('hidden');
+                document.getElementById('address-step').classList.remove('hidden');
+            });
+
+            // Step 2: Payment Selection
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            const upiSection = document.getElementById('upi-section');
+            const placeOrderBtn = document.getElementById('place-order-btn');
+
+            let selectedMethod = '';
+
+            paymentOptions.forEach(opt => {
+                opt.addEventListener('click', () => {
+                    // Reset
+                    paymentOptions.forEach(o => o.classList.remove('active'));
+                    opt.classList.add('active');
+                    selectedMethod = opt.dataset.method;
+
+                    // Logic
+                    if (selectedMethod === 'upi') {
+                        upiSection.style.display = 'block';
+                        placeOrderBtn.textContent = "I've Paid";
+                        placeOrderBtn.classList.remove('hidden');
+                    } else {
+                        upiSection.style.display = 'none';
+                        placeOrderBtn.textContent = 'Place Order';
+                        placeOrderBtn.classList.remove('hidden');
+                    }
+                });
+            });
+
+            // Step 3: Place Order
+            placeOrderBtn.addEventListener('click', () => {
+                // Simulate processing
+                placeOrderBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+                setTimeout(() => {
+                    completeOrder(selectedMethod);
+                }, 2000);
+            });
+
+            function completeOrder(method) {
+                const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+                const date = new Date().toISOString();
+                const cart = CartManager.getCart();
+                const totalAmount = total.toFixed(2);
+
+                // 1. Save Order
+                const newOrder = {
+                    id: orderId,
+                    date: date,
+                    items: cart,
+                    total: totalAmount,
+                    status: 'Preparing',
+                    paymentMethod: method.toUpperCase()
+                };
+
+                const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+                orders.unshift(newOrder);
+                localStorage.setItem('orders', JSON.stringify(orders));
+
+                // 2. Add Notification
+                const newNotification = {
+                    id: Date.now(),
+                    title: 'Order Placed',
+                    message: `Your order #${orderId} has been successfully placed.`,
+                    time: new Date().toLocaleString(),
+                    read: false
+                };
+                const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+                notifications.unshift(newNotification);
+                localStorage.setItem('notifications', JSON.stringify(notifications));
+
+                // 3. Clear Cart
+                localStorage.removeItem('cart');
+                CartManager.updateCartCount(); // Visual update
+
+                // 4. Show Success
+                document.getElementById('payment-step').classList.add('hidden');
+                document.getElementById('success-step').classList.remove('hidden');
+                document.getElementById('order-id').textContent = orderId;
+            }
+        });
+    </script>
+</body>
+
+</html>

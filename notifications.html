@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - HemanthFoodiee</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .notif-container {
+            padding: 100px 5% 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .notif-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .notif-card:hover {
+            transform: translateX(5px);
+        }
+
+        .notif-icon {
+            color: #e74c3c;
+            font-size: 1.5rem;
+            background: #fff4e6;
+            padding: 1rem;
+            border-radius: 50%;
+        }
+
+        .notif-content h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .notif-time {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        .empty-notif {
+            text-align: center;
+            padding: 3rem;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar user-navbar">
+            <div class="logo">
+                <h1><a href="user-dashboard.html"><span>Hemanth</span>Foodiee</a></h1>
+            </div>
+            <div class="nav-links">
+                <a href="user-dashboard.html">Home</a>
+                <a href="my-orders.html">My Orders</a>
+                <a href="notifications.html" class="active">Notifications</a>
+                <a href="cart.html">Cart</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="notif-container">
+        <h1>Notifications</h1>
+        <div id="notif-list">
+            <!-- Dynamic Notifications -->
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.getElementById('notif-list');
+            const notifs = JSON.parse(localStorage.getItem('notifications') || '[]');
+
+            if (notifs.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-notif">
+                        <i class="fas fa-bell-slash fa-3x"></i>
+                        <p>No new notifications.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            notifs.forEach(n => {
+                const card = document.createElement('div');
+                card.className = 'notif-card';
+                card.innerHTML = `
+                    <div class="notif-icon">
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <div class="notif-content">
+                        <h3>${n.title}</h3>
+                        <p>${n.message}</p>
+                        <span class="notif-time">${n.time}</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        });
+    </script>
+</body>
+
+</html>
